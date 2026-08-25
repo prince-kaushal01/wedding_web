@@ -13,7 +13,7 @@ import page3Text2     from '../assets/page3-text2-trim.webp'
 // 0, offset up. Set inline (not via JS) so the browser paints them        ──
 // already-hidden from the first frame; no flash before the scroll-        ──
 // triggered animation takes over.                                         ──
-const hidden = { opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity' }
+const hidden = { opacity: 0, transform: 'translateY(-40px)' }
 
 // ─── Countdown target ───────────────────────────────────────────────────────
 const WEDDING = new Date('2026-10-15T00:00:00')
@@ -148,13 +148,9 @@ const Page3 = () => {
       scrollTrigger: {
         trigger: stackRef.current,
         start: 'top 80%',
-        end: '+=620',
+        end: '+=500',
         scrub: 0.5,
-        // See Page2 for why this uses scrollTrigger's onUpdate rather   ──
-        // than the timeline's onComplete to release will-change.        ──
-        onUpdate: (self) => {
-          if (self.progress === 0 || self.progress === 1) gsap.set(items, { clearProps: 'willChange' })
-        },
+        invalidateOnRefresh: true,
       },
     })
 
@@ -243,7 +239,7 @@ const Page3 = () => {
           alt="Couple"
           style={{
             ...hidden,
-            width: 'clamp(48%, calc(48% + (100dvh - 700px) * 0.48), 70%)',
+            width: 'clamp(55%, calc(55% + (100dvh - 700px) * 0.48), 60%)',
             marginBottom: 'clamp(0.4rem, calc(0.4rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
         />
@@ -255,8 +251,8 @@ const Page3 = () => {
           alt=""
           style={{
             ...hidden,
-            width: 'clamp(15%, calc(15% + (100dvh - 700px) * 0.08), 38%)',
-            marginBottom: 'clamp(0.3rem, calc(0.3rem + (100dvh - 700px) * 0.005), 1.25rem)',
+            width: 'clamp(20%, calc(20% + (100dvh - 700px) * 0.28), 38%)',
+            marginBottom: 'clamp(1.2rem, calc(1.2rem + (100dvh - 700px) * 0.5), 1.25rem)',
           }}
         />
 

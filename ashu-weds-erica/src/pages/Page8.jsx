@@ -51,6 +51,7 @@ const Page8 = () => {
         start: 'top 80%',
         end: 'top 30%',
         scrub: 0.5,
+        invalidateOnRefresh: true,
         onUpdate: clearWCOnSettle([text1Ref.current, text2Ref.current, text3Ref.current, text4Ref.current, flowerRef.current]),
       },
     })
@@ -67,6 +68,7 @@ const Page8 = () => {
         start: 'top 60%',
         end: '+=500',
         scrub: 0.5,
+        invalidateOnRefresh: true,
         onUpdate: clearWCOnSettle([leftRef.current, rightRef.current, leftflowerRef.current, rightflowerRef.current, leftitemRef.current, rightitemRef.current, coupleEntranceRef.current]),
       },
     })
@@ -126,14 +128,13 @@ const Page8 = () => {
       >
         <div
           ref={coupleEntranceRef}
-          style={{ opacity: 0, transform: 'translateY(60px)', willChange: 'transform, opacity' }}
+          style={{ opacity: 0, transform: 'translateY(60px)' }}
         >
           <img
             ref={coupleBreatheRef}
             src={page8Couple}
             alt="Couple"
             className="w-full block"
-            style={{ willChange: 'transform' }}
           />
         </div>
       </div>
@@ -148,7 +149,7 @@ const Page8 = () => {
         alt=""
         className="absolute top-0 w-[14%] z-20"
         style={{
-          opacity: 0, transform: 'translateY(-60px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateY(-60px)',
           left: 'clamp(0%, calc(60% + (100dvh - 700px) * 0.02), 4%)',
         }}
       />
@@ -158,7 +159,7 @@ const Page8 = () => {
         alt=""
         className="absolute top-0 w-[14%] z-20"
         style={{
-          opacity: 0, transform: 'translateY(-60px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateY(-60px)',
           right: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.02), 4%)',
         }}
       />
@@ -174,7 +175,7 @@ const Page8 = () => {
         alt=""
         className="absolute top-0 z-10"
         style={{
-          opacity: 0, transform: 'translateX(-100px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(-100px)',
           left: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.015), 3%)',
           height: 'clamp(50%, calc(50% + (100dvh - 700px) * 0.02), 100%)',
           aspectRatio: '208 / 923',
@@ -186,7 +187,7 @@ const Page8 = () => {
         alt=""
         className="absolute top-0 z-10"
         style={{
-          opacity: 0, transform: 'translateX(100px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(100px)',
           right: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.015), 3%)',
           height: 'clamp(50%, calc(50% + (100dvh - 700px) * 0.02), 100%)',
           aspectRatio: '208 / 923',
@@ -203,7 +204,7 @@ const Page8 = () => {
         alt=""
         className="absolute z-10"
         style={{
-          opacity: 0, transform: 'translateX(-100px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(-100px)',
           bottom: 'clamp(5%, calc(5% + (100dvh - 700px) * 0.02), 6%)',
           left: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.015), 3%)',
           width: 'clamp(21%, calc(21% + (100dvh - 700px) * 0.08), 28%)',
@@ -215,7 +216,7 @@ const Page8 = () => {
         alt=""
         className="absolute z-10"
         style={{
-          opacity: 0, transform: 'translateX(100px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(100px)',
           bottom: 'clamp(5%, calc(5% + (100dvh - 700px) * 0.02), 6%)',
           right: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.015), 3%)',
           width: 'clamp(21%, calc(21% + (100dvh - 700px) * 0.08), 28%)',
@@ -247,7 +248,7 @@ const Page8 = () => {
           src={page8Text1}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(40%, calc(40% + (100dvh - 700px) * 0.58), 57%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -259,7 +260,7 @@ const Page8 = () => {
           src={page8Text2}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(50%, calc(47% + (100dvh - 700px) * 0.58), 62%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -272,7 +273,7 @@ const Page8 = () => {
           alt=""
           className="mt-2 "
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(43%, calc(43% + (100dvh - 700px) * 0.38), 55%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -284,7 +285,7 @@ const Page8 = () => {
           ref={text4Ref}
           className="relative mt-2 "
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(35%, calc(33% + (100dvh - 700px) * 0.23), 43%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -299,7 +300,7 @@ const Page8 = () => {
               src={page8Flower}
               alt=""
               className="w-full block"
-              style={{ opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity' }}
+              style={{ opacity: 0, transform: 'translateY(-40px)' }}
             />
           </span>
           {/* ↑ top-[50%] targets the gap baked into text4 — nudge if it drifts */}

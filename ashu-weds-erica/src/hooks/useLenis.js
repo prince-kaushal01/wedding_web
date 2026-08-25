@@ -14,15 +14,14 @@ export function useLenis() {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
-      // touchMultiplier — even with syncTouch left at its default (false, ──
-      // so native touch scrolling is what you actually see), Lenis still  ──
-      // scales every touch-move delta by this before feeding it into its  ──
-      // own internally-tracked, smoothly-animated (1.2s) scroll position, ──
-      // which ScrollTrigger reads from. At 2x, a normal swipe fed Lenis a ──
-      // target twice as far as intended, and rapid successive swipes      ──
-      // (totally normal on mobile) compounded into large jumps — reading  ──
-      // as "skipped pages" while scrolling. Reverted to Lenis's own       ──
-      // default of 1.                                                     ──
+      // syncTouch: true — on touch devices, Lenis syncs its internal      ──
+      // scroll position directly to native touch scroll in real-time,     ──
+      // with no 1.2s easing lag. Without this, Lenis applies its smooth   ──
+      // easing to touch events, which means there's a 1.2s delay between  ──
+      // the user's finger and what ScrollTrigger reads — animations appear ──
+      // to lag or freeze completely. With syncTouch, touch feels native    ──
+      // while mouse-wheel still gets the smooth easing via smoothWheel.   ──
+      syncTouch: true,
       touchMultiplier: 1,
     })
 
@@ -35,9 +34,28 @@ export function useLenis() {
       lenis.raf(time * 1000)
     })
 
-    gsap.ticker.lagSmoothing(0)
+    // lagSmoothing(500, 33) — restores GSAP's default protection against  ──
+    // frame-drop catch-up jumps. lagSmoothing(0) disables this entirely:  ──
+    // when the mobile browser pauses for GC or heavy paint, GSAP would    ──
+    // try to "catch up" by jumping the animation forward all at once,     ──
+    // which looks exactly like the screen cut/freeze the user sees.       ──
+    // The defaults (500ms threshold, 33ms minimum frame) prevent that.    ──
+    gsap.ticker.lagSmoothing(500, 33)
+
+    // Refresh ScrollTrigger positions after viewport changes (mobile URL  ──
+    // bar shows/hides). Without this, the cached start/end pixel values   ──
+    // become stale and animations fire at wrong positions or appear frozen ──
+    // because the trigger zone no longer matches the visible viewport.    ──
+    let resizeTimer
+    const onResize = () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200)
+    }
+    window.addEventListener('resize', onResize, { passive: true })
 
     return () => {
+      clearTimeout(resizeTimer)
+      window.removeEventListener('resize', onResize)
       lenis.destroy()
       lenisRef.current = null
     }

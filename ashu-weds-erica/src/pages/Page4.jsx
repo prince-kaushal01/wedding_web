@@ -49,6 +49,7 @@ const Page4 = () => {
         start: 'top 90%',
         end: 'top 30%',
         scrub: 0.5,
+        invalidateOnRefresh: true,
         onUpdate: clearWCOnSettle(textItems),
       },
     })
@@ -69,9 +70,7 @@ const Page4 = () => {
         start: 'top 60%',
         end: '+=600',
         scrub: 0.5,
-        // coupleBreatheRef keeps its will-change — its infinite loop      ──
-        // below runs forever; everything else here is done moving once   ──
-        // revealed.                                                       ──
+        invalidateOnRefresh: true,
         onUpdate: clearWCOnSettle([peacockRef.current, leftflowerRef.current, rightflowerRef.current, coupleEntranceRef.current]),
       },
     })
@@ -136,7 +135,7 @@ const Page4 = () => {
           src={page4Text1}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(52%, calc(60% + (100dvh - 700px) * 0.38), 67%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -147,7 +146,7 @@ const Page4 = () => {
           src={page4Text2}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(65%, calc(72% + (100dvh - 700px) * 0.08), 77%)',
             marginBottom: 'clamp(0.5rem, calc(0rem + (100dvh - 700px) * 0.115), 1.25rem)',
           }}
@@ -159,7 +158,7 @@ const Page4 = () => {
           alt=""
           className="mt-2"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(45%, calc(45% + (100dvh - 700px) * 0.08), 49%)',
             marginBottom: 'clamp(0.5rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -170,7 +169,7 @@ const Page4 = () => {
           src={page4Text4}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(19%, calc(27% + (100dvh - 700px) * 0.28), 27%)',
             marginBottom: 'clamp(0.3rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -182,7 +181,7 @@ const Page4 = () => {
           alt=""
           className="mt-2"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(25%, calc(25% + (100dvh - 700px) * 0.08), 29%)',
             marginBottom: 'clamp(0.2rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -194,7 +193,7 @@ const Page4 = () => {
           alt=""
           className="mt-2"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(41%, calc(48% + (100dvh - 700px) * 0.18), 49%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -216,14 +215,14 @@ const Page4 = () => {
       {/* separate nested elements so none of the three transforms clobber  */}
       {/* each other.                                                       */}
       <div
-        className="absolute bottom-4 left-1/2 z-10"
+        className="absolute bottom-2 left-1/2 z-10"
         style={{
-          width: 'clamp(65%, calc(65% + (100dvh - 700px) * 0.58), 85%)',
-          transform: 'translateX(calc(-55% + clamp(-10px, (100dvh - 700px) * 0.3, 20px)))',
+          width: 'clamp(75%, calc(75% + (100dvh - 700px) * 0.58), 85%)',
+          transform: 'translateX(calc(-40% + clamp(-40%, (100dvh - 700px) * 0.3, -10%)))',
         }}
       >
-        <div ref={coupleEntranceRef} style={{ opacity: 0, transform: 'scale(0.85)', willChange: 'transform, opacity' }}>
-          <img ref={coupleBreatheRef} src={page4Couple} alt="Couple" className="w-full block" style={{ willChange: 'transform' }} />
+        <div ref={coupleEntranceRef} style={{ opacity: 0, transform: 'scale(0.85)' }}>
+          <img ref={coupleBreatheRef} src={page4Couple} alt="Couple" className="w-full block" />
         </div>
       </div>
       {/* ↑ Adjust the width clamp to resize, bottom-4 to move up/down    */}
@@ -239,7 +238,7 @@ const Page4 = () => {
         alt=""
         className="absolute z-20"
         style={{
-          opacity: 0, transform: 'translateX(80px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(80px)',
           top: 'clamp(34%, calc(34% + (100dvh - 700px) * 0.02), 30%)',
           right: 'clamp(-2%, calc(-5% - (100dvh - 700px) * 0.81), -10%)',
           width: 'clamp(30%, calc(30% + (100dvh - 700px) * 0.28), 42%)',
@@ -255,7 +254,7 @@ const Page4 = () => {
         alt=""
         className="absolute bottom-0 z-20"
         style={{
-          opacity: 0, transform: 'translateY(60px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateY(60px)',
           left: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.005), 3%)',
           width: 'clamp(40%, calc(40% + (100dvh - 700px) * 0.48), 54%)',
         }}
@@ -270,7 +269,7 @@ const Page4 = () => {
         alt=""
         className="absolute bottom-0 z-20"
         style={{
-          opacity: 0, transform: 'translateY(60px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateY(60px)',
           right: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.015), 3%)',
           width: 'clamp(22%, calc(22% + (100dvh - 700px) * 0.02), 27%)',
         }}

@@ -25,11 +25,7 @@ const Page5 = () => {
         start: 'top 90%',
         end: 'top 30%',
         scrub: 0.5,
-        // See Page2 for why this uses scrollTrigger's onUpdate rather   ──
-        // than the timeline's onComplete to release will-change.        ──
-        onUpdate: (self) => {
-          if (self.progress === 0 || self.progress === 1) gsap.set(items, { clearProps: 'willChange' })
-        },
+        invalidateOnRefresh: true,
       },
     })
 
@@ -81,7 +77,7 @@ const Page5 = () => {
           src={page5Text1}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(30%, calc(30% + (100dvh - 700px) * 0.9), 43%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -92,7 +88,7 @@ const Page5 = () => {
           src={page5Text2}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(42%, calc(42% + (100dvh - 700px) * 0.39), 58%)',
             marginBottom: 'clamp(0.3rem, calc(0.3rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -104,7 +100,7 @@ const Page5 = () => {
           alt=""
           className="mt-2"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(47%, calc(47% + (100dvh - 700px) * 0.30), 60%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -116,7 +112,7 @@ const Page5 = () => {
           alt=""
           className="mt-2"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(30%, calc(30% + (100dvh - 700px) * 0.19), 45%)',
           }}
         />
@@ -127,7 +123,7 @@ const Page5 = () => {
           alt=""
           className="mt-2"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(24%, calc(24% + (100dvh - 700px) * 0.17), 36%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}

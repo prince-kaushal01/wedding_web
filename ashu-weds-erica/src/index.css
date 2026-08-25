@@ -42,6 +42,9 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent iOS rubber-band bounce from causing visual glitches/cuts      */
+  /* at scroll boundaries while animations are mid-play.                   */
+  overscroll-behavior: none;
 }
 
 /* Utility: full viewport height that accounts for mobile browser chrome */

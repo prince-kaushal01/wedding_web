@@ -37,6 +37,7 @@ const Page6 = () => {
         start: 'top 90%',
         end: 'top 50%',
         scrub: 0.5,
+        invalidateOnRefresh: true,
         onUpdate: clearWCOnSettle(textItems),
       },
     })
@@ -54,6 +55,7 @@ const Page6 = () => {
         start: 'top 60%',
         end: 'top 10%',
         scrub: 0.4,
+        invalidateOnRefresh: true,
         onUpdate: clearWCOnSettle([leftTreeRef.current, rightTreeRef.current]),
       },
     })
@@ -97,7 +99,7 @@ const Page6 = () => {
         alt=""
         className="absolute z-5"
         style={{
-          opacity: 0, transform: 'translateX(-120px) scale(0.6)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(-120px) scale(0.6)',
           top: 'clamp(36%, calc(36% + (100dvh - 700px) * 0.15), 39%)',
           left: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.015), 3%)',
           width: 'clamp(60%, calc(60% + (100dvh - 700px) * 0.08), 38%)',
@@ -114,7 +116,7 @@ const Page6 = () => {
         alt=""
         className="absolute z-5"
         style={{
-          opacity: 0, transform: 'translateX(120px) scale(0.6)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(120px) scale(0.6)',
           top: 'clamp(18%, calc(18% + (100dvh - 700px) * 0.015), 3%)',
           right: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.015), 3%)',
           width: 'clamp(25%, calc(25% + (100dvh - 700px) * 0.08), 46%)',
@@ -145,7 +147,7 @@ const Page6 = () => {
           src={page6Text1}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(58%, calc(65% + (100dvh - 700px) * 0.29), 70%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -156,7 +158,7 @@ const Page6 = () => {
           src={page6Text2}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(64%, calc(64% + (100dvh - 700px) * 0.08), 68%)',
             marginBottom: 'clamp(1rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -168,7 +170,7 @@ const Page6 = () => {
           alt=""
           className="mt-2"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(46%, calc(48% + (100dvh - 700px) * 0.19), 54%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -179,7 +181,7 @@ const Page6 = () => {
           src={page6Text4}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(21%, calc(25% + (100dvh - 700px) * 0.08), 29%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.13), 1.25rem)',
           }}
@@ -191,7 +193,7 @@ const Page6 = () => {
           alt=""
           className="mt-2"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(23%, calc(23% + (100dvh - 700px) * 0.08), 31%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}

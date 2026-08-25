@@ -16,7 +16,7 @@ import page2Text9 from '../assets/page2-text9.webp'
 // Set inline (not via JS) so the browser paints them already-hidden    ──
 // from the first frame; no flash of visible content before the         ──
 // scroll-triggered animation takes over.                               ──
-const hidden = { opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity' }
+const hidden = { opacity: 0, transform: 'translateY(-40px)' }
 
 const Page2 = () => {
   const stackRef = useRef(null)
@@ -37,16 +37,12 @@ const Page2 = () => {
         start: 'top 85%',
         end: '+=600',
         scrub: 0.5,
-        // Drops will-change once the range settles at either end (0 =    ──
-        // fully hidden, 1 = fully revealed), freeing the compositor      ──
-        // layer instead of leaving it permanently reserved. Uses         ──
-        // scrollTrigger's own onUpdate rather than the timeline's        ──
-        // onComplete — under scrub, onComplete can get silently skipped  ──
-        // if a later ScrollTrigger.refresh() elsewhere on the page       ──
-        // resyncs progress to 1 without a normal forward render pass.    ──
-        onUpdate: (self) => {
-          if (self.progress === 0 || self.progress === 1) gsap.set(items, { clearProps: 'willChange' })
-        },
+        // Recompute start/end pixel positions when ScrollTrigger.refresh  ──
+        // fires (e.g. after mobile URL bar shows/hides or Page10's async  ──
+        // iframes load). Without this, stale positions mean the trigger   ──
+        // zone no longer matches the visible viewport — animations appear  ──
+        // frozen or fire at the wrong scroll depth.                       ──
+        invalidateOnRefresh: true,
       },
     })
 

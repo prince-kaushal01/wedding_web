@@ -52,6 +52,7 @@ const Page7 = () => {
         start: 'top 80%',
         end: 'top 40%',
         scrub: 0.5,
+        invalidateOnRefresh: true,
         onUpdate: clearWCOnSettle(textItems),
       },
     })
@@ -63,6 +64,7 @@ const Page7 = () => {
         start: 'top 50%',
         end: '+=500',
         scrub: 0.5,
+        invalidateOnRefresh: true,
         onUpdate: clearWCOnSettle([leftLightRef.current, rightLightRef.current, coupleEntranceRef.current, leftItemsRef.current, rightItemsRef.current]),
       },
     })
@@ -112,7 +114,7 @@ const Page7 = () => {
         alt=""
         className="absolute left-0 z-10"
         style={{
-          opacity: 0, transform: 'translateX(-100px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(-100px)',
           top: 'clamp(29%, calc(29% + (100dvh - 700px) * 0.90), 30%)',
           width: 'clamp(28%, calc(35% + (100dvh - 700px) * 0.1), 44%)',
         }}
@@ -129,7 +131,7 @@ const Page7 = () => {
         alt=""
         className="absolute right-0 z-10"
         style={{
-          opacity: 0, transform: 'translateX(100px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(100px)',
           top: 'clamp(36%, calc(36% + (100dvh - 700px) * 0.12), 38%)',
           width: 'clamp(64%, calc(66% + (100dvh - 700px) * 0.58), 60%)',
         }}
@@ -145,7 +147,7 @@ const Page7 = () => {
         alt=""
         className="absolute z-10"
         style={{
-          opacity: 0, transform: 'translateX(-100px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(-100px)',
           bottom: 'clamp(6%, calc(6% + (100dvh - 700px) * 0.02), 12%)',
           left: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.015), 3%)',
           width: 'clamp(44%, calc(44% + (100dvh - 700px) * 0.2), 50%)',
@@ -162,7 +164,7 @@ const Page7 = () => {
         alt=""
         className="absolute z-10"
         style={{
-          opacity: 0, transform: 'translateX(100px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(100px)',
           bottom: 'clamp(14.5%, calc(14.5% + (100dvh - 700px) * 0.02), 14%)',
           right: 'clamp(0%, calc(0% + (100dvh - 700px) * 1.02), 0%)',
           width: 'clamp(60%, calc(60% + (100dvh - 700px) * 0.8), 65%)',
@@ -193,7 +195,7 @@ const Page7 = () => {
           src={page7Text1}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(55%, calc(55% + (100dvh - 700px) * 0.58), 68%)',
             marginBottom: 'clamp(0.3rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -204,7 +206,7 @@ const Page7 = () => {
           src={page7Text2}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(74%, calc(72% + (100dvh - 700px) * 0.28), 80%)',
             marginBottom: 'clamp(0.2rem, calc(0.2rem + (100dvh - 700px) * 0.55), 1.25rem)',
           }}
@@ -216,7 +218,7 @@ const Page7 = () => {
           alt=""
           className="mt-3"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(45%, calc(45% + (100dvh - 700px) * 0.68), 53%)',
             marginBottom: 'clamp(0.2rem, calc(0rem + (100dvh - 700px) * 0.5), 1rem)',
           }}
@@ -228,7 +230,7 @@ const Page7 = () => {
           alt=""
           className="mt-2"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(22%, calc(22% + (100dvh - 700px) * 0.28), 30%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -254,8 +256,8 @@ const Page7 = () => {
           left: 'clamp(29%, calc(29% + (100dvh - 700px) * 0.02), 30%)',
         }}
       >
-        <div ref={coupleEntranceRef} style={{ opacity: 0, transform: 'scale(0.85)', willChange: 'transform, opacity' }}>
-          <img ref={coupleBreatheRef} src={page7Couple} alt="Couple" className="w-full block" style={{ willChange: 'transform' }} />
+        <div ref={coupleEntranceRef} style={{ opacity: 0, transform: 'scale(0.85)' }}>
+          <img ref={coupleBreatheRef} src={page7Couple} alt="Couple" className="w-full block" />
         </div>
       </div>
       {/* ↑ Adjust the width/left clamps to resize/reposition      */}

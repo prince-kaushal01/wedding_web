@@ -41,6 +41,7 @@ const Page9 = () => {
         start: 'top 80%',
         end: 'top 20%',
         scrub: 0.5,
+        invalidateOnRefresh: true,
         onUpdate: clearWCOnSettle([text1Ref.current, text2Ref.current, text3Ref.current, text4Ref.current, text5Ref.current]),
       },
     })
@@ -57,6 +58,7 @@ const Page9 = () => {
         start: 'top 40%',
         end: 'top 0%',
         scrub: 0.5,
+        invalidateOnRefresh: true,
         onUpdate: clearWCOnSettle([tableRef.current, coupleEntranceRef.current]),
       },
     })
@@ -101,7 +103,7 @@ const Page9 = () => {
         alt=""
         className="absolute z-30"
         style={{
-          opacity: 0, transform: 'translateX(-100px)', willChange: 'transform, opacity',
+          opacity: 0, transform: 'translateX(-100px)',
           bottom: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.02), 4%)',
           left: 'clamp(0%, calc(0% + (100dvh - 700px) * 0.015), 3%)',
           width: 'clamp(46%, calc(48% + (100dvh - 700px) * 0.08), 46%)',
@@ -125,8 +127,8 @@ const Page9 = () => {
           right: 'clamp(15%, calc(15% + (100dvh - 700px) * 0.02), 12%)',
         }}
       >
-        <div ref={coupleEntranceRef} style={{ opacity: 0, transform: 'scale(0.85)', willChange: 'transform, opacity' }}>
-          <img ref={coupleBreatheRef} src={page9Couple} alt="Couple" className="w-full block" style={{ willChange: 'transform' }} />
+        <div ref={coupleEntranceRef} style={{ opacity: 0, transform: 'scale(0.85)' }}>
+          <img ref={coupleBreatheRef} src={page9Couple} alt="Couple" className="w-full block" />
         </div>
       </div>
 
@@ -153,7 +155,7 @@ const Page9 = () => {
           src={page9Text1}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(25%, calc(25% + (100dvh - 700px) * 0.28), 28%)',
             marginBottom: 'clamp(0.2rem, calc(0.2rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -165,7 +167,7 @@ const Page9 = () => {
           src={page9Text2}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(47%, calc(47% + (100dvh - 700px) * 0.28), 56%)',
             marginBottom: 'clamp(0.3rem, calc(0.3rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -177,7 +179,7 @@ const Page9 = () => {
           src={page9Text3}
           alt=""
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(72%, calc(72% + (100dvh - 700px) * 0.28), 80%)',
             marginBottom: 'clamp(0.4rem, calc(0.4rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -190,7 +192,7 @@ const Page9 = () => {
           alt=""
           className="mt-2"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(50%, calc(50% + (100dvh - 700px) * 0.08), 54%)',
             marginBottom: 'clamp(0.3rem, calc(0.3rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}
@@ -203,7 +205,7 @@ const Page9 = () => {
           alt=""
           className="mt-2"
           style={{
-            opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity',
+            opacity: 0, transform: 'translateY(-40px)',
             width: 'clamp(21%, calc(21% + (100dvh - 700px) * 0.08), 29%)',
             marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
           }}

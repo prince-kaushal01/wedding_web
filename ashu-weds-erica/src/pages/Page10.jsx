@@ -19,13 +19,11 @@ import page10Location2 from '../assets/location2.svg'
 // then the embeds/buttons below update automatically.                  ──
 const HOTEL_WEBSITE_URL = 'https://thetivolihotels.com/hotel/the-tivoli/'
 const VENUE_1 = 'Tivoli, Chattarpur, New Delhi'
-const VENUE_2 = 'https://maps.app.goo.gl/rtekhPRCX67AEHhu7'
 // Map 2's real embed src (Gurudwara Sri Guru Nanak Sahib Ji) — provided   ──
 // directly as a full Google Maps embed URL, since a share link like      ──
 // VENUE_2 above can't be plugged into the `q=` query embed format below. ──
 const VENUE_2_EMBED_SRC = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.583544018941!2d77.08089957528948!3d28.642241175659404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d04924c9bc0cf%3A0x5751daf9147836a7!2sGurudwara%20Sri%20Guru%20Nanak%20Sahib%20Ji!5e0!3m2!1sen!2sin!4v1787564503949!5m2!1sen!2sin'
 const mapEmbedUrl = (q) => `https://www.google.com/maps?q=${encodeURIComponent(q)}&output=embed`
-const mapDirectionsUrl = (q) => `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(q)}`
 
 // Shared starting state for every scroll-animated element — opacity 0,  ──
 // offset up. Set inline (not via JS) so the browser paints them          ──
@@ -33,7 +31,7 @@ const mapDirectionsUrl = (q) => `https://www.google.com/maps/dir/?api=1&destinat
 // triggered animation takes over. Only ever applied to an element with   ──
 // no other transform of its own (the parent flex column owns the        ──
 // centering transform, so GSAP never clobbers it).                      ──
-const hidden = { opacity: 0, transform: 'translateY(-40px)', willChange: 'transform, opacity' }
+const hidden = { opacity: 0, transform: 'translateY(-40px)' }
 
 const Page10 = () => {
   const stackRef = useRef(null)
@@ -68,16 +66,7 @@ const Page10 = () => {
           start: 'top 90%',
           end: (self) => Math.min(self.start + 600, ScrollTrigger.maxScroll(window)),
           scrub: 0.5,
-          // Drops will-change once this item's range settles at either   ──
-          // end (0 = fully hidden, 1 = fully revealed). Uses              ──
-          // scrollTrigger's own onUpdate rather than the timeline's       ──
-          // onComplete — under scrub, onComplete can get silently         ──
-          // skipped if the ScrollTrigger.refresh() below (once this       ──
-          // page's async map iframes load) resyncs progress to 1          ──
-          // without a normal forward render pass.                         ──
-          onUpdate: (self) => {
-            if (self.progress === 0 || self.progress === 1) gsap.set(el, { clearProps: 'willChange' })
-          },
+          invalidateOnRefresh: true,
         },
       })
       tl.to(el, { opacity: 1, y: 0, ease: 'power2.out', force3D: true })
