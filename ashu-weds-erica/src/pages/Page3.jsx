@@ -147,7 +147,7 @@ const Page3 = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: stackRef.current,
-        start: 'top 80%',
+        start: 'top 90%',
         end: '+=500',
         scrub: 0.5,
         invalidateOnRefresh: true,
@@ -187,86 +187,104 @@ const Page3 = () => {
       {/* tune the baseline/rate/cap on each independently.                 */}
       <div
         ref={stackRef}
-        className="absolute left-1/2 -translate-x-1/2 w-full flex flex-col items-center z-10 "
+        className="absolute left-1/2 -translate-x-1/2 w-full flex flex-col items-center justify-between z-10 overflow-hidden"
         style={{
-          top: 'clamp(8%, calc(4% + (100dvh - 700px) * 0.52), 9%)',
-          gap: 'clamp(0.4rem, calc(0.5rem + (100dvh - 700px) * 0.15), 2rem)',
+          top: 'clamp(6%, calc(6% + (100dvh - 700px) * 0.52), 7%)',
+          bottom: '8%',
+          paddingTop: 'clamp(0.25rem, 1dvh, 0.75rem)',
+          paddingBottom: 'clamp(0.45rem, 1dvh, 0.75rem)',
         }}
       >
 
-        {/* Top flower ornament */}
-        <img
-          ref={flowerRef}
-          src={page3Topflower}
-          alt=""
-          style={{ ...hidden, width: 'clamp(7%, calc(9% + (100dvh - 700px) * 0.08), 22%)' }}
-        />
+        {/* ── Sub-div 1: flower + text1 + countdown box ── */}
+        <div className="flex flex-col items-center w-full" style={{ gap: 'clamp(0.4rem, calc(0.5rem + (100dvh - 700px) * 0.15), 2rem)' }}>
 
-        {/* "Our Countdown to Forever Begins…" */}
-        <img
-          ref={text1Ref}
-          src={page3Text1}
-          alt=""
-          style={{
-            ...hidden,
-            width: 'clamp(85%, calc(85% + (100dvh - 700px) * 0.08), 80%)',
-            marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
-          }}
-        />
+          {/* Top flower ornament */}
+          <img
+            ref={flowerRef}
+            src={page3Topflower}
+            alt=""
+            style={{
+              ...hidden,
+              width: 'clamp(12%, calc(12% + (100dvh - 700px) * 0.08), 22%)',
+              marginBottom: 'clamp(0.55rem, calc(0.55rem + (100dvh - 700px) * 0.005), 0.75rem)',
+            }}
+          />
 
-        {/* Countdown boxes — the digits (Countdown) are centered on each  */}
-        {/* box via the % positions measured on page3-box.png (see comment */}
-        {/* above the Countdown component) — they stay correct as long as  */}
-        {/* this container's aspect ratio (865/195) is unchanged.          */}
-        <div
-          ref={boxRef}
-          className="relative"
-          style={{
-            ...hidden,
-            width: 'clamp(78%, calc(78% + (100dvh - 700px) * 0.08), 92%)',
-            aspectRatio: '865 / 195',
-            marginBottom: 'clamp(2.5rem, calc(2.5rem + (100dvh - 700px) * 0.05), 0.2rem)',
-          }}
-        >
-          <img src={page3Box} alt="" className="w-full h-full" />
-          <Countdown />
+          {/* "Our Countdown to Forever Begins…" */}
+          <img
+            ref={text1Ref}
+            src={page3Text1}
+            alt=""
+            style={{
+              ...hidden,
+              width: 'clamp(80%, calc(80% + (100dvh - 700px) * 0.08), 85%)',
+              marginBottom: 'clamp(0.85rem, calc(0.85rem + (100dvh - 700px) * 0.5), 0.75rem)',
+            }}
+          />
+
+          {/* Countdown boxes — the digits (Countdown) are centered on each  */}
+          {/* box via the % positions measured on page3-box.png (see comment */}
+          {/* above the Countdown component) — they stay correct as long as  */}
+          {/* this container's aspect ratio (865/195) is unchanged.          */}
+          <div
+            ref={boxRef}
+            className="relative"
+            style={{
+              ...hidden,
+              width: 'clamp(78%, calc(78% + (100dvh - 700px) * 0.08), 92%)',
+              aspectRatio: '865 / 195',
+              marginBottom: 'clamp(0.25rem, calc(0.25rem + (100dvh - 700px) * 0.005), 0.75rem)',
+            }}
+          >
+            <img src={page3Box} alt="" className="w-full h-full" />
+            <Countdown />
+          </div>
+
         </div>
 
-        {/* Couple photo */}
-        <img
-          ref={imgRef}
-          src={page3Img}
-          alt="Couple"
-          style={{
-            ...hidden,
-            width: 'clamp(55%, calc(55% + (100dvh - 700px) * 0.48), 60%)',
-            marginBottom: 'clamp(0.4rem, calc(0.4rem + (100dvh - 700px) * 0.005), 1.25rem)',
-          }}
-        />
+        {/* ── Sub-div 2: couple photo ── */}
+        <div className="flex flex-col items-center w-full">
 
-        {/* Decorative line */}
-        <img
-          ref={lineRef}
-          src={page3Line}
-          alt=""
-          style={{
-            ...hidden,
-            width: 'clamp(20%, calc(20% + (100dvh - 700px) * 0.28), 38%)',
-            marginBottom: 'clamp(1.2rem, calc(1.2rem + (100dvh - 700px) * 0.5), 1.25rem)',
-          }}
-        />
+          {/* Couple photo */}
+          <img
+            ref={imgRef}
+            src={page3Img}
+            alt="Couple"
+            style={{
+              ...hidden,
+              width: 'clamp(50%, calc(50% + (100dvh - 700px) * 0.48), 60%)',
+            }}
+          />
 
-        {/* Bottom text — "Your presence will make our day…" */}
-        <img
-          ref={text2Ref}
-          src={page3Text2}
-          alt=""
-          style={{
-            ...hidden,
-            width: 'clamp(60%, calc(60% + (100dvh - 700px) * 0.08), 84%)',
-            marginBottom: 'clamp(0rem, calc(0rem + (100dvh - 700px) * 0.005), 1.25rem)',
-          }}
-        />
+        </div>
+
+        {/* ── Sub-div 3: decorative line + bottom text ── */}
+        <div className="flex flex-col items-center w-full" style={{ gap: 'clamp(0.8rem, calc(0.8rem + (100dvh - 700px) * 0.15), 1.2rem)' }}>
+
+          {/* Decorative line */}
+          <img
+            ref={lineRef}
+            src={page3Line}
+            alt=""
+            style={{
+              ...hidden,
+              width: 'clamp(20%, calc(20% + (100dvh - 700px) * 0.28), 38%)',
+            }}
+          />
+
+          {/* Bottom text — "Your presence will make our day…" */}
+          <img
+            ref={text2Ref}
+            src={page3Text2}
+            alt=""
+            style={{
+              ...hidden,
+              width: 'clamp(60%, calc(60% + (100dvh - 700px) * 0.08), 84%)',
+            }}
+          />
+
+        </div>
 
       </div>
     </div>
