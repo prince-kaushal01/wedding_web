@@ -18,10 +18,11 @@ import bottomRight from '../assets/page1-bottomright.png'
 
 const Page1 = () => {
   return (
-    // Two screens tall (200dvh). Background sticks to the top and the building sticks to the bottom
-    // while the texts scroll. When the 200dvh is finished, everything scrolls away together.
+    // 165dvh tall = 65dvh of scrolling + one full screen. Background sticks to the top and the building
+    // sticks to the bottom while the texts scroll. When the 165dvh is finished, everything scrolls away together.
+    // To make the second texts appear sooner or later, change BOTH 65dvh values below (165 = 65 + 100).
     // overflow-clip is used (not overflow-hidden) because overflow-hidden would break sticky.
-    <div className="relative flex h-[200dvh] w-full flex-col justify-between overflow-clip bg-[#d9ecf7]">
+    <div className="relative flex h-[165dvh] w-full flex-col justify-between overflow-clip bg-[#d9ecf7]">
       {/* Background: sticky at the top */}
       <img
         src={bg}
@@ -36,23 +37,24 @@ const Page1 = () => {
         className="sticky bottom-0 z-20 h-[clamp(12rem,41dvh,26rem)] w-full shrink-0 object-center"
       />
 
-      {/* Palm trees: placed at the very bottom of the 200dvh, above the building (z-30).
+      {/* Palm trees: placed at the very bottom of the page, above the building (z-30).
           They come up from below while scrolling and end up sitting on the building */}
       <img
         src={bottomLeft}
         alt=""
-        className="absolute bottom-[-2dvh] left-0 z-30 h-[clamp(14rem,50dvh,32rem)] w-auto max-w-none translate-x-[-55%]"
+        className="absolute bottom-[-2dvh] left-0 z-30 h-[clamp(14rem,50dvh,32rem)] w-auto max-w-none translate-x-[-45%]"
       />
       <img
         src={bottomRight}
         alt=""
-        className="absolute right-0 bottom-[-2dvh] z-30 h-[clamp(17rem,60dvh,38rem)] w-auto max-w-none translate-x-[60%]"
+        className="absolute right-0 bottom-[-2dvh] z-30 h-[clamp(18rem,64dvh,40rem)] w-auto max-w-none translate-x-[55%]"
       />
 
       {/* All texts: below the building (z-10), they scroll normally */}
       <div className="absolute inset-x-0 top-0 z-10">
-        {/* ---------- Screen 1 ---------- */}
-        <div className="flex h-dvh flex-col items-center pt-20">
+        {/* ---------- First texts: logo, names and date. This box is 65dvh tall,
+            so the second texts start right after it instead of a full screen later ---------- */}
+        <div className="flex h-[65dvh] flex-col items-center pt-22">
           {/* Logo */}
           <img
             src={logo}
@@ -64,25 +66,25 @@ const Page1 = () => {
           <img
             src={text1}
             alt="Jyoti & Prakhar"
-            className="mt-[clamp(0.75rem,3.5dvh,2.25rem)] h-[clamp(2.5rem,2vh,7.5rem)] w-auto max-w-none"
+            className="mt-[clamp(0.75rem,3.5dvh,2.25rem)] h-[clamp(3rem,2vh,7.5rem)] w-auto max-w-none"
           />
 
           {/* 29th - 30th */}
           <img
             src={text2}
             alt="29th - 30th"
-            className="mt-[clamp(0.5rem,2.5dvh,1.5rem)] h-[clamp(0.5rem,2.2dvh,1rem)] w-auto max-w-none"
+            className="mt-[clamp(0.5rem,2.5dvh,1.5rem)] h-[clamp(0.6rem,2.4dvh,1.2rem)] w-auto max-w-none"
           />
 
           {/* November 2026 */}
           <img
             src={text3}
             alt="November 2026"
-            className="mt-[clamp(0.4rem,1.5dvh,1rem)] h-[clamp(0.5rem,1.5dvh,1rem)] w-auto max-w-none"
+            className="mt-[clamp(0.4rem,1.5dvh,1rem)] h-[clamp(0.6rem,1.6dvh,1.4rem)] w-auto max-w-none"
           />
         </div>
 
-        {/* ---------- Screen 2 ---------- */}
+        {/* ---------- Second texts: fill the screen once the scrolling is finished ---------- */}
         <div className="flex h-dvh flex-col items-center pt-[clamp(1.5rem,6dvh,4rem)]">
           {/* Ganesh symbol */}
           <img
@@ -109,7 +111,7 @@ const Page1 = () => {
           <img
             src={text7}
             alt="We cordially invite your gracious presence to the occasion of engagement ceremony of"
-            className="mt-[clamp(0.5rem,2.2dvh,1.5rem)] h-[clamp(2.75rem,7.6dvh,5rem)] max-w-[80%] object-contain"
+            className="mt-[clamp(0.5rem,2.2dvh,1.5rem)] h-[clamp(2.75rem,7.6dvh,5rem)] max-w-[90%] object-contain"
           />
 
           {/* Jyoti */}
@@ -123,7 +125,7 @@ const Page1 = () => {
           <img
             src={text9}
             alt="D/o Mrs. Kiran & Mr. Digvijay Singh"
-            className="mt-[clamp(0.25rem,1dvh,0.7rem)] h-[clamp(0.65rem,1.9dvh,1.25rem)] max-w-[62%] object-contain"
+            className="mt-[clamp(0.25rem,1dvh,0.7rem)] h-[clamp(0.65rem,1.9dvh,1.25rem)] max-w-[90%] object-contain"
           />
 
           {/* and */}
@@ -144,7 +146,7 @@ const Page1 = () => {
           <img
             src={text12}
             alt="S/o Mrs. Abha & Mr. Bhanu Pratap Singh"
-            className="mt-[clamp(0.3rem,1.2dvh,0.8rem)] h-[clamp(0.65rem,1.9dvh,1.25rem)] max-w-[68%] object-contain"
+            className="mt-[clamp(0.3rem,1.2dvh,0.8rem)] h-[clamp(0.65rem,1.9dvh,1.25rem)] max-w-[90%] object-contain"
           />
         </div>
       </div>
