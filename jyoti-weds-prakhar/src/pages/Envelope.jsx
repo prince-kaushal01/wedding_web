@@ -4,7 +4,8 @@ import envTop from '../assets/env-top.png'
 import envBottom from '../assets/env-bottom.png'
 import envButton from '../assets/env-button.png'
 
-const Envelope = () => {
+// onOpened: a function from App.jsx, called when the envelope has fully gone
+const Envelope = ({ onOpened }) => {
   // contextSafe makes GSAP clean up the animation if this component is removed
   const { contextSafe } = useGSAP()
 
@@ -23,6 +24,9 @@ const Envelope = () => {
     // 3. Whole envelope fades out, then it is removed so Page1 can be used
     tl.to('.envelope', { opacity: 0, duration: 1 })
     tl.set('.envelope', { display: 'none' })
+
+    // 4. Tell App.jsx the envelope is gone, so Page1 can start its animation
+    tl.call(onOpened)
   })
 
   return (
@@ -30,7 +34,7 @@ const Envelope = () => {
     <div className="envelope fixed inset-0 z-50 flex justify-center overflow-hidden bg-[#d3e4ec]">
       {/* Stage: a 9:16 box as tall as the screen (and never narrower than the screen).
           Everything inside is sized in % of this box, so it looks the same on short and long screens */}
-      <div className="relative h-[max(100dvh,177.78vw)] aspect-9/16 shrink-0">
+      <div className="relative h-[max(100svh,177.78vw)] aspect-9/16 shrink-0">
         {/* Envelope body */}
         <img
           src={envBottom}
