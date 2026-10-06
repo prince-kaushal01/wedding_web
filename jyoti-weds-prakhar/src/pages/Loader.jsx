@@ -37,6 +37,11 @@ const Loader = () => {
     // Wait for all images and the Google fonts, then fade the loading screen out
     Promise.all([...imagesReady, document.fonts.ready]).then(() => {
       if (cancelled) return
+
+      // Everything is loaded and has its final height now: make sure we are at the top
+      // before the loading screen fades (it still covers the page, so nobody sees a jump)
+      window.scrollTo(0, 0)
+
       gsap.to('.loader', {
         opacity: 0,
         duration: 0.8,

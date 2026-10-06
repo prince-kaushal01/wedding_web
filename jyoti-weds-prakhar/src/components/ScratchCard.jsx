@@ -35,9 +35,13 @@ const ScratchCard = ({ children, className }) => {
       ctx.fillStyle = gold
       ctx.fillRect(0, 0, width, height)
 
-      // "Scratch here" label, in the Pinyon Script font (loaded from Google Fonts in index.html)
+      // "Scratch here" label, in the Great Vibes font (loaded from Google Fonts in index.html)
       ctx.fillStyle = '#6b4a12'
-      ctx.font = `${Math.max(14, height * 0.45)}px "Great Vibes", cursive`
+
+      // TEXT SIZE: the text height is the card height x 0.52.
+      // Make 0.52 bigger for bigger text (for example 0.6) or smaller for smaller text (for example 0.45).
+      // The 14 is the smallest size in px the text is ever allowed to be.
+      ctx.font = `${Math.max(14, height * 0.60)}px "Great Vibes", cursive`
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       ctx.fillText('Scratch here', width / 2, height / 2)
@@ -96,7 +100,7 @@ const ScratchCard = ({ children, className }) => {
     resizeWatcher.observe(canvas)
 
     // The font may arrive after the card is first painted, so paint it again once the font is ready
-    document.fonts.load('16px "Pinyon Script"').then(paintCover)
+    document.fonts.load('16px "Great Vibes"').then(paintCover)
 
     canvas.addEventListener('pointerdown', startScratch)
     canvas.addEventListener('pointermove', scratch)

@@ -18,6 +18,10 @@ gsap.registerPlugin(ScrollTrigger)
 // Without this, ScrollTrigger recalculates every animation each time that happens, and scrolling freezes.
 ScrollTrigger.config({ ignoreMobileResize: true })
 
+// ScrollTrigger also remembers the scroll position and puts it back after a refresh.
+// This turns that off, so a refresh always starts from the top (envelope, then Page1).
+ScrollTrigger.clearScrollMemory('manual')
+
 const App = () => {
   // false while the envelope is on screen, true once it has opened and gone
   const [envelopeOpened, setEnvelopeOpened] = useState(false)
