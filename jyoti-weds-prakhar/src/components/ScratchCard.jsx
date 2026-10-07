@@ -41,7 +41,7 @@ const ScratchCard = ({ children, className }) => {
       // TEXT SIZE: the text height is the card height x 0.52.
       // Make 0.52 bigger for bigger text (for example 0.6) or smaller for smaller text (for example 0.45).
       // The 14 is the smallest size in px the text is ever allowed to be.
-      ctx.font = `${Math.max(14, height * 0.60)}px "Great Vibes", cursive`
+      ctx.font = `${Math.max(14, height * 0.55)}px "Great Vibes", cursive`
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       ctx.fillText('Scratch here', width / 2, height / 2)

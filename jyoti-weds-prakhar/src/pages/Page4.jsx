@@ -27,7 +27,7 @@ const Page4 = () => {
         trigger: '.page4',
         start: 'top bottom', // begins when the top of Page4 enters from the bottom of the screen
         end: 'top top', // finishes when Page4 fills the screen
-        scrub: true, // tie the animation to the scroll position
+        scrub: 0.8, // follows the scroll, taking 0.8s to catch up: this glide is what makes it smooth. true = no glide
       },
     })
 
@@ -140,12 +140,20 @@ const Page4 = () => {
           className="p4-text mt-[clamp(0.7rem,2.2svh,1.5rem)] h-[clamp(0.75rem,2.1svh,1.4rem)] w-auto max-w-none"
         />
 
-        {/* 30 */}
-        <img
-          src={text3}
-          alt="30"
-          className="p4-text mt-[clamp(0.15rem,0.6svh,0.4rem)] h-[clamp(1.9rem,5.4svh,3.6rem)] w-auto max-w-none"
-        />
+        {/* 30 with a small "th" at its top right. The image and the "th" sit side by side in one box,
+            The "th" is real text in the same colour as the number image. The image and the "th" each have
+            the page's text class, so the 30 drops in first and the "th" drops in right after it */}
+        <div className="mt-[clamp(0.15rem,0.6svh,0.4rem)] flex items-start">
+          <img
+            src={text3}
+            alt="30"
+            className="p4-text h-[clamp(1.9rem,5.4svh,3.6rem)] w-auto max-w-none"
+          />
+          {/* "th": text size is the text-[clamp(...)] class, colour is the text-[#...] class */}
+          <span className="p4-text ml-[0.15em] font-serif text-[clamp(0.75rem,2.2svh,1.45rem)] leading-none text-[#120270]">
+            th
+          </span>
+        </div>
 
         {/* November 2026 */}
         <img

@@ -28,7 +28,7 @@ const Page3 = () => {
         trigger: '.page3',
         start: 'top bottom', // begins when the top of Page3 enters from the bottom of the screen
         end: 'top top', // finishes when Page3 fills the screen
-        scrub: true, // tie the animation to the scroll position
+        scrub: 0.8, // follows the scroll, taking 0.8s to catch up: this glide is what makes it smooth. true = no glide
       },
     })
 

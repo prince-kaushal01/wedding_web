@@ -3,6 +3,10 @@ import { useGSAP } from '@gsap/react'
 import envTop from '../assets/env-top.png'
 import envBottom from '../assets/env-bottom.png'
 import envButton from '../assets/env-button.png'
+import song from '../assets/song.mp3'
+
+// The song starts from this point: 1 minute 31 seconds = 91 seconds
+const SONG_START = 91
 
 // onOpened: a function from App.jsx, called when the envelope has fully gone
 const Envelope = ({ onOpened }) => {
@@ -11,6 +15,19 @@ const Envelope = ({ onOpened }) => {
 
   // Runs when the seal is clicked
   const openEnvelope = contextSafe(() => {
+    // Browsers only let a website start sound inside a tap. This tap on the seal is our only chance,
+    // so the song is started here, at full "play" but with its volume knob turned down to 0.
+    // The volume knob is a Web Audio "gain". (Muting the song and un-muting it later does not work:
+    // browsers refuse to un-mute outside a tap, and phones ignore the normal volume setting.)
+    const music = document.querySelector('.song')
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext
+    const audio = new AudioContextClass()
+    const volume = audio.createGain()
+    volume.gain.value = 0 // 0 = silent, 1 = full volume
+    audio.createMediaElementSource(music).connect(volume).connect(audio.destination)
+    audio.resume()
+    music.play().catch(() => {}) // if the browser still refuses, the site simply stays silent
+
     const tl = gsap.timeline()
 
     // 1. Seal fades out (and can't be clicked again)
@@ -27,11 +44,30 @@ const Envelope = ({ onOpened }) => {
 
     // 4. Tell App.jsx the envelope is gone, so Page1 can start its animation
     tl.call(onOpened)
+
+    // 5. Page1 is visible now: jump the song to 01:31 and turn the volume up over 1 second
+    tl.call(() => {
+      music.currentTime = SONG_START
+      if (music.paused) music.play().catch(() => {})
+      volume.gain.linearRampToValueAtTime(1, audio.currentTime + 1)
+    })
   })
 
   return (
     // Full screen wrapper, sits on top of Page1 and hides anything outside the screen
     <div className="envelope fixed inset-0 z-50 flex justify-center overflow-hidden bg-[#d3e4ec]">
+      {/* The song. It has no controls so it shows nothing on the page.
+          When it reaches the end it goes back to 01:31 and plays again */}
+      <audio
+        className="song"
+        src={song}
+        preload="auto"
+        onEnded={(event) => {
+          event.target.currentTime = SONG_START
+          event.target.play()
+        }}
+      />
+
       {/* Stage: a 9:16 box as tall as the screen (and never narrower than the screen).
           Everything inside is sized in % of this box, so it looks the same on short and long screens */}
       <div className="relative h-[max(100svh,177.78vw)] aspect-9/16 shrink-0">

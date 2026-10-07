@@ -92,7 +92,7 @@ const Page2 = () => {
         <img
           src={topAbove}
           alt=""
-          className="p2-sparkle absolute top-0 left-0 h-[33svh] w-full object-cover"
+          className="p2-sparkle absolute -top-16 left-0 h-[33svh] w-full object-cover z-50"
         />
 
         {/* Left and right curtains: full height, partly outside the screen */}
@@ -112,20 +112,20 @@ const Page2 = () => {
         </div>
 
         {/* Chandeliers and roses at the top */}
-        <div className="p2-top pointer-events-none absolute inset-0">
+        <div className="p2-top pointer-events-none absolute inset-0 z-10">
           <img
             src={top}
             alt=""
-            className="absolute top-[-6svh] left-1/2 h-[45svh] w-auto max-w-none -translate-x-1/2"
+            className="absolute -top-20 left-1/2 h-[50svh] w-auto max-w-none -translate-x-1/2"
           />
         </div>
 
         {/* Curtain swag in the top right corner */}
-        <div className="p2-topright pointer-events-none absolute inset-0">
+        <div className="p2-topright pointer-events-none absolute inset-0 z-20">
           <img
             src={topRight}
             alt=""
-            className="absolute top-[-3svh] right-0 h-[45svh] w-auto max-w-none translate-x-[35%]"
+            className="absolute -top-4 right-14 h-[50svh] w-auto max-w-none translate-x-[35%]"
           />
         </div>
 

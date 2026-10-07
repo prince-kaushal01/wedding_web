@@ -10,7 +10,10 @@ import Page2 from './pages/Page2'
 import Page3 from './pages/Page3'
 import Page4 from './pages/Page4'
 import Page5 from './pages/Page5'
+import Blessings from './pages/Blessings'
 import Rsvp from './pages/Rsvp'
+import Footer from './pages/Footer'
+import skyBg from './assets/rsvp.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -63,7 +66,15 @@ const App = () => {
       <Page2 />
       <Page5 />
       <Page4 />
-      <Rsvp />
+
+      {/* The ending: blessings, RSVP and footer share ONE sunset-sky picture behind all three,
+          so the sky runs through them without a break */}
+      <div className="relative overflow-hidden bg-[#a9cdf5]">
+        <img src={skyBg} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <Blessings />
+        <Rsvp />
+        <Footer />
+      </div>
     </>
   )
 }

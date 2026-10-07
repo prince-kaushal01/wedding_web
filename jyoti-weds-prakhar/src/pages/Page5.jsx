@@ -28,7 +28,7 @@ const Page5 = () => {
         trigger: '.page5',
         start: 'top bottom', // begins when the top of Page5 enters from the bottom of the screen
         end: 'top top', // finishes when Page5 fills the screen
-        scrub: true, // tie the animation to the scroll position
+        scrub: 0.8, // follows the scroll, taking 0.8s to catch up: this glide is what makes it smooth. true = no glide
       },
     })
 
@@ -152,12 +152,20 @@ const Page5 = () => {
           className="p5-text mt-[clamp(0.1rem,0.4svh,0.3rem)] h-[clamp(0.75rem,2.1svh,1.4rem)] w-auto max-w-none"
         />
 
-        {/* 30 */}
-        <img
-          src={text3}
-          alt="30"
-          className="p5-text mt-[clamp(0.1rem,0.4svh,0.3rem)] h-[clamp(1.9rem,5.4svh,3.6rem)] w-auto max-w-none"
-        />
+        {/* 30 with a small "th" at its top right. The image and the "th" sit side by side in one box,
+            The "th" is real text in the same colour as the number image. The image and the "th" each have
+            the page's text class, so the 30 drops in first and the "th" drops in right after it */}
+        <div className="mt-[clamp(0.1rem,0.4svh,0.3rem)] flex items-start">
+          <img
+            src={text3}
+            alt="30"
+            className="p5-text h-[clamp(1.9rem,5.4svh,3.6rem)] w-auto max-w-none"
+          />
+          {/* "th": text size is the text-[clamp(...)] class, colour is the text-[#...] class */}
+          <span className="p5-text ml-[0.15em] font-serif text-[clamp(0.75rem,2.2svh,1.45rem)] leading-none text-[#0d6193]">
+            th
+          </span>
+        </div>
 
         {/* November 2026 */}
         <img
@@ -193,7 +201,7 @@ const Page5 = () => {
         <img
           src={couple}
           alt="Jyoti and Prakhar"
-          className="absolute bottom-[9svh] left-[56%] h-[44.5svh] max-w-[88%] -translate-x-1/2 object-contain object-bottom"
+          className="absolute bottom-[9svh] left-[56%] h-[43svh] max-w-[88%] -translate-x-1/2 object-contain object-bottom"
         />
       </div>
 
@@ -202,14 +210,14 @@ const Page5 = () => {
         <img
           src={bottomLeft}
           alt=""
-          className="absolute bottom-[-2svh] left-0 h-[20.5svh] w-auto max-w-none translate-x-[-8%]"
+          className="absolute -bottom-4 left-2 h-[21svh] w-auto max-w-none translate-x-[-8%]"
         />
       </div>
       <div className="p5-bottomright pointer-events-none absolute inset-0">
         <img
           src={bottomRight}
           alt=""
-          className="absolute right-0 bottom-[-2svh] h-[21svh] w-auto max-w-none translate-x-[8%]"
+          className="absolute right-2 bottom-0 h-[17svh] w-auto max-w-none translate-x-[8%]"
         />
       </div>
     </div>
