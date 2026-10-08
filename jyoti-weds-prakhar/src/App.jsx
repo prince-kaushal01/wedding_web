@@ -13,7 +13,7 @@ import Page5 from './pages/Page5'
 import Blessings from './pages/Blessings'
 import Rsvp from './pages/Rsvp'
 import Footer from './pages/Footer'
-import skyBg from './assets/rsvp.png'
+import skyBg from './assets/rsvp.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 

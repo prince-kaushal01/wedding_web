@@ -53,7 +53,11 @@ src/
   assets/             every image, plus song.mp3
 ```
 
-Images are named after the page they belong to: `env-*` for the envelope, `page1-*` to `page5-*` for the pages, and `rsvp.png` for the sky behind the ending.
+Images are named after the page they belong to: `env-*` for the envelope, `page1-*` to `page5-*` for the pages, and `rsvp.webp` for the sky behind the ending.
+
+All images in `src/assets` are **WebP**, which is about a sixth of the size of the PNGs they were made from. The original PNG files are kept in the `original-images/` folder. That folder is not part of the website, so guests never download it.
+
+To add or replace an image, save it as `.webp` in `src/assets` (any image editor or an online "PNG to WebP" converter can do this). Keep small text images lossless, and use quality 85 – 90 for large pictures.
 
 ## Things you are likely to change
 
@@ -96,8 +100,7 @@ Keep to these when editing, so new work matches the rest:
 
 ## Before sending the invitation to guests
 
-- [ ] **Connect the RSVP form.** `SHEET_URL` is still a dummy link, so replies are **not saved anywhere yet**, even though guests see "Thank you". Replace it with a Google Apps Script web app link that adds a row to your sheet. A normal Google Sheet share link will not work.
+- [ ] **Check RSVP replies reach the sheet.** Send a test reply and look for the new row. The site shows "Thank you" whether or not the row was saved, so the sheet is the only real check.
 - [ ] **Test on real phones**, both iPhone and Android: the song, the scratch card, scrolling, and the map button.
 - [ ] **Check the map button** opens the right venue.
-- [ ] **Make the heavy files smaller** so the loading screen is short on mobile data. The largest are `song.mp3` (8.8 MB) and six images of 2 – 3.5 MB each: `page5-bg.png`, `page2-bg.png`, `rsvp.png`, `page4-bg.png`, `page1-logo.PNG`, `page3-bg.png`.
-- [ ] **Remove unused files** from `src/assets`: `page2-couple.png` (replaced by `page2-couple-crop.png`) and `pattle.jpeg` (replaced by `pattle.png`).
+- [ ] **Make the song smaller.** `song.mp3` is 8.8 MB, more than all the images together (5.8 MB). Trimming it to start at 1:31 and saving it at a lower bitrate would bring it to about 2 MB.

@@ -1,8 +1,8 @@
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import envTop from '../assets/env-top.png'
-import envBottom from '../assets/env-bottom.png'
-import envButton from '../assets/env-button.png'
+import envTop from '../assets/env-top.webp'
+import envBottom from '../assets/env-bottom.webp'
+import envButton from '../assets/env-button.webp'
 import song from '../assets/song.mp3'
 
 // The song starts from this point: 1 minute 31 seconds = 91 seconds
