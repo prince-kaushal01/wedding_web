@@ -16,27 +16,24 @@ import petal from '../assets/pattle.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// How many petals fall. GSAP gives each one its own position, size and timing (see the useGSAP block)
+// How many petals fall
 const petals = Array.from({ length: 28 }, (_, index) => index)
 
 const Page3 = () => {
-  // Scroll animation: plays while Page3 scrolls up into the screen, and every element moves only
-  // as much as the user scrolls (scrub). The page is not stuck, it scrolls normally.
+  // Scroll animation: plays as Page3 scrolls into view (scrub = tied to the scroll position)
   useGSAP(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '.page3',
-        start: 'top bottom', // begins when the top of Page3 enters from the bottom of the screen
-        end: 'top top', // finishes when Page3 fills the screen
-        scrub: 0.8, // follows the scroll, taking 0.8s to catch up: this glide is what makes it smooth. true = no glide
+        start: 'top bottom',
+        end: 'top top',
+        scrub: 0.8, // 0.8s glide behind the scroll; true = no glide
       },
     })
 
-    // The number at the end of each line is the position on the timeline (0 = start, 10 = end).
-    // The page comes into view from its top first, so top elements animate first and bottom elements last.
-    // Elements that are placed with a Tailwind translate class sit inside a full-screen wrapper div,
-    // and GSAP moves the wrapper. (If GSAP moved those images directly it would break their translate.)
-    // For the wrappers, xPercent / yPercent are a % of the screen: -50 = half a screen up or left.
+    // Last number on each line = position on the timeline (0 to 10).
+    // Images with a Tailwind translate class sit in a wrapper div and GSAP moves the wrapper,
+    // because moving those images directly would break their translate
 
     // 1. Flower garlands come down from the top
     tl.from('.p3-top', { yPercent: -30, duration: 3, ease: 'none' }, 1)
@@ -51,37 +48,32 @@ const Page3 = () => {
     // 4. Flower platters come up from the bottom
     tl.from('.p3-bottom', { yPercent: 30, duration: 2.5, ease: 'none' }, 7.5)
 
-    // ---------- Falling petals ----------
-    // NOT tied to the scroll: the petals fall slowly by themselves, again and again.
-    // Once they start they never stop, even when Page3 is not on screen.
+    // Falling petals: not tied to the scroll. Once started they never stop
     const petalTl = gsap.timeline({
       scrollTrigger: {
         trigger: '.page3',
-        start: 'top 90%', // start falling when the top of Page3 is 70% down the screen
-        toggleActions: 'play none none none', // play once it starts, and do nothing after that (never pause)
+        start: 'top 90%',
+        toggleActions: 'play none none none', // play once, never pause
       },
     })
 
     gsap.utils.toArray('.p3-petal').forEach((petal) => {
-      // each petal gets a random place across the page and a random size
       gsap.set(petal, {
         left: gsap.utils.random(5, 92) + '%',
         scale: gsap.utils.random(0.6, 1.3),
       })
 
-      // it falls from just above the page to just below it, drifting sideways and spinning, then repeats.
-      // Page3 hides anything outside itself, so the petals are never seen outside Page3.
-      // It moves with y (a transform) and not with top, because transforms are much lighter for the phone
+      // Falls with y (a transform), not top: transforms are much lighter for the phone
       petalTl.fromTo(
         petal,
         { y: 0, rotation: gsap.utils.random(-90, 90) },
         {
-          y: () => document.querySelector('.page3').offsetHeight * 1.1, // a little more than the page height
+          y: () => document.querySelector('.page3').offsetHeight * 1.1,
           x: gsap.utils.random(-50, 50),
           rotation: gsap.utils.random(180, 540),
           duration: gsap.utils.random(7, 12), // seconds for one fall: bigger = slower
           ease: 'none',
-          repeat: -1, // fall again forever
+          repeat: -1,
         },
         gsap.utils.random(0, 8), // each petal starts at a different moment
       )
@@ -89,9 +81,7 @@ const Page3 = () => {
   })
 
   return (
-    // One screen tall, scrolls normally. All sizes follow the screen height (svh) so it looks the same on short and long screens
     <div className="page3 relative h-svh w-full overflow-hidden bg-[#f7e7d3]">
-      {/* Background: arch, sky and floor */}
       <img
         src={bg}
         alt=""
@@ -107,44 +97,37 @@ const Page3 = () => {
         />
       </div>
 
-      {/* Texts, stacked in the middle */}
       <div className="relative flex h-full flex-col items-center pt-[25.5svh]">
-        {/* Oli Ceremony */}
         <img
           src={text1}
           alt="Oli Ceremony"
           className="p3-text h-[clamp(2.6rem,7.4svh,4.9rem)] w-auto max-w-none"
         />
 
-        {/* Sunday */}
         <img
           src={text2}
           alt="Sunday"
           className="p3-text mt-[clamp(0.3rem,1svh,0.7rem)] h-[clamp(0.75rem,2.1svh,1.4rem)] w-auto max-w-none"
         />
 
-        {/* 29th */}
         <img
           src={text3}
           alt="29th"
           className="p3-text mt-[clamp(0.1rem,0.3svh,0.25rem)] h-[clamp(2.1rem,5.9svh,3.9rem)] w-auto max-w-none"
         />
 
-        {/* November 2026 */}
         <img
           src={text4}
           alt="November 2026"
           className="p3-text mt-[clamp(0.25rem,0.8svh,0.6rem)] h-[clamp(0.6rem,1.7svh,1.15rem)] w-auto max-w-none"
         />
 
-        {/* 4:30 PM Onwards */}
         <img
           src={text5}
           alt="4:30 PM Onwards"
           className="p3-text mt-[clamp(0.7rem,2.2svh,1.5rem)] h-[clamp(0.6rem,1.7svh,1.15rem)] w-auto max-w-none"
         />
 
-        {/* Attire - Traditional */}
         <img
           src={text6}
           alt="Attire - Traditional"
@@ -179,7 +162,7 @@ const Page3 = () => {
         />
       </div>
 
-      {/* Falling petals: a layer on top of everything in Page3. GSAP places and moves each petal */}
+      {/* Falling petals */}
       <div className="pointer-events-none absolute inset-0 z-10">
         {petals.map((index) => (
           <img

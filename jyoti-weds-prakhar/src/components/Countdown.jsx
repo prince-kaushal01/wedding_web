@@ -15,11 +15,9 @@ const getTimeLeft = (target) => {
   }
 }
 
-// One box of the countdown (for example the seconds).
-// value = the number to show now, previous = the number it showed just before
+// One box. value = the number now, previous = the number just before
 const CountdownUnit = ({ name, label, value, previous }) => {
-  // Runs every time the number changes: the old number flips away upwards,
-  // the new number flips in from below
+  // On change: the old number flips away upwards, the new one flips in from below
   useGSAP(() => {
     if (value === previous) return
 
@@ -37,14 +35,9 @@ const CountdownUnit = ({ name, label, value, previous }) => {
 
   return (
     <div className="flex flex-col items-center">
-      {/* The box. overflow-hidden hides the numbers while they are outside it, perspective gives the flip its depth */}
-      {/* NUMBER SIZE: the text-[clamp(1.2rem,3.6svh,1.9rem)] class below sets the size of the numbers.
-          The three values are: smallest size, normal size (follows the screen height), biggest size.
-          For bigger numbers raise all three a little (for example 1.4rem,4.2svh,2.2rem), for smaller lower them. */}
+      {/* NUMBER SIZE: the text-[clamp(...)] class below (smallest, normal, biggest) */}
       <div className="relative flex h-[clamp(2.75rem,8svh,4.25rem)] w-[clamp(2.75rem,8svh,4.25rem)] items-center justify-center overflow-hidden rounded-xl border border-white/70 bg-white/45 font-['Google_Sans',sans-serif] text-[clamp(1.2rem,3.6svh,1.9rem)] text-[#1f2f6b] shadow-md backdrop-blur-sm perspective-midrange">
-        {/* old number, leaving */}
         <span className={`cd-${name}-old absolute opacity-0`}>{previous}</span>
-        {/* new number, arriving */}
         <span className={`cd-${name}-new absolute`}>{value}</span>
       </div>
 
@@ -55,7 +48,6 @@ const CountdownUnit = ({ name, label, value, previous }) => {
   )
 }
 
-// The whole countdown: days, hours, minutes and seconds until the date given
 const Countdown = ({ date }) => {
   const target = new Date(date).getTime()
 
@@ -65,7 +57,6 @@ const Countdown = ({ date }) => {
     return { now, before: now }
   })
 
-  // Every second: work out the new time and remember the old one
   useEffect(() => {
     const timer = setInterval(() => {
       setTime((old) => ({ now: getTimeLeft(target), before: old.now }))

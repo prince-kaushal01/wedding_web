@@ -19,23 +19,20 @@ import text7 from '../assets/page4-text7.png'
 gsap.registerPlugin(ScrollTrigger)
 
 const Page4 = () => {
-  // Scroll animation: plays while Page4 scrolls up into the screen, and every element moves only
-  // as much as the user scrolls (scrub). The page is not stuck, it scrolls normally.
+  // Scroll animation: plays as Page4 scrolls into view (scrub = tied to the scroll position)
   useGSAP(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '.page4',
-        start: 'top bottom', // begins when the top of Page4 enters from the bottom of the screen
-        end: 'top top', // finishes when Page4 fills the screen
-        scrub: 0.8, // follows the scroll, taking 0.8s to catch up: this glide is what makes it smooth. true = no glide
+        start: 'top bottom',
+        end: 'top top',
+        scrub: 0.8, // 0.8s glide behind the scroll; true = no glide
       },
     })
 
-    // The number at the end of each line is the position on the timeline (0 = start, 10 = end).
-    // The page comes into view from its top first, so top elements animate first and bottom elements last.
-    // Elements that are placed with a Tailwind translate class sit inside a full-screen wrapper div,
-    // and GSAP moves the wrapper. (If GSAP moved those images directly it would break their translate.)
-    // For the wrappers, xPercent / yPercent are a % of the screen: -50 = half a screen up or left.
+    // Last number on each line = position on the timeline (0 to 10).
+    // Images with a Tailwind translate class sit in a wrapper div and GSAP moves the wrapper,
+    // because moving those images directly would break their translate
 
     // 1. Flowers come down from the top
     tl.from('.p4-top', { yPercent: -25, duration: 2.5, ease: 'none' }, 0.5)
@@ -51,10 +48,8 @@ const Page4 = () => {
     tl.from('.p4-bottomleft', { xPercent: -100, duration: 2, ease: 'none' }, 8)
     tl.from('.p4-bottomright', { xPercent: 100, duration: 2, ease: 'none' }, 8)
 
-    // 5. Couple: this one is NOT tied to the scroll. It plays by itself once Page4 is far enough on screen.
-    //    transformOrigin is where the couple stands, so it zooms on its own place
+    // 5. Couple: not tied to the scroll. It grows once Page4 is far enough on screen, then keeps zooming gently
 
-    // zoom: keeps zooming in and out gently, forever (starts paused)
     const zoom = gsap.to('.p4-couple', {
       scale: 1.05,
       duration: 1.5,
@@ -64,7 +59,6 @@ const Page4 = () => {
       paused: true,
     })
 
-    // grow: from 0 to full size (starts paused). When it finishes, the zoom starts
     const grow = gsap.from('.p4-couple', {
       scale: 0,
       transformOrigin: '50% 95%',
@@ -76,11 +70,10 @@ const Page4 = () => {
 
     ScrollTrigger.create({
       trigger: '.page4',
-      start: 'top 20%', // the point where the couple appears (top of Page4 is 20% down the screen)
-      onEnter: () => grow.timeScale(1).play(), // scrolling down past the point: grow at normal speed
+      start: 'top 20%', // where the couple appears
+      onEnter: () => grow.timeScale(1).play(),
       onLeaveBack: () => {
-        // scrolling back up past the point: stop the zoom and shrink back to 0.
-        // timeScale(3) makes the shrink 3 times faster than the grow
+        // scrolling back up: stop the zoom and shrink back to 0, 3 times faster than the grow
         zoom.pause()
         grow.timeScale(3).reverse()
       },
@@ -88,9 +81,7 @@ const Page4 = () => {
   })
 
   return (
-    // One screen tall, scrolls normally. All sizes follow the screen height (svh) so it looks the same on short and long screens
     <div className="page4 relative h-svh w-full overflow-hidden bg-[#f6d9c8]">
-      {/* Background: pillars, sky and path */}
       <img
         src={bg}
         alt=""
@@ -124,25 +115,20 @@ const Page4 = () => {
         />
       </div>
 
-      {/* Texts, stacked from the top */}
       <div className="relative flex h-full flex-col items-center pt-[12.5svh]">
-        {/* Engagement */}
         <img
           src={text1}
           alt="Engagement"
           className="p4-text h-[clamp(2.6rem,7.3svh,4.8rem)] w-auto max-w-none"
         />
 
-        {/* Monday */}
         <img
           src={text2}
           alt="Monday"
           className="p4-text mt-[clamp(0.7rem,2.2svh,1.5rem)] h-[clamp(0.75rem,2.1svh,1.4rem)] w-auto max-w-none"
         />
 
-        {/* 30 with a small "th" at its top right. The image and the "th" sit side by side in one box,
-            The "th" is real text in the same colour as the number image. The image and the "th" each have
-            the page's text class, so the 30 drops in first and the "th" drops in right after it */}
+        {/* 30 and a text "th" beside it. Both have the page's text class, so the th drops in right after the 30 */}
         <div className="mt-[clamp(0.15rem,0.6svh,0.4rem)] flex items-start">
           <img
             src={text3}
@@ -155,28 +141,24 @@ const Page4 = () => {
           </span>
         </div>
 
-        {/* November 2026 */}
         <img
           src={text4}
           alt="November 2026"
           className="p4-text mt-[clamp(0.3rem,0.9svh,0.6rem)] h-[clamp(0.6rem,1.7svh,1.15rem)] w-auto max-w-none"
         />
 
-        {/* 5:00 PM Onwards */}
         <img
           src={text5}
           alt="5:00 PM Onwards"
           className="p4-text mt-[clamp(0.75rem,2.3svh,1.55rem)] h-[clamp(0.6rem,1.7svh,1.15rem)] w-auto max-w-none"
         />
 
-        {/* At - North Central Lawns */}
         <img
           src={text6}
           alt="At - North Central Lawns"
           className="p4-text mt-[clamp(0.75rem,2.3svh,1.55rem)] h-[clamp(0.6rem,1.7svh,1.15rem)] w-auto max-w-none"
         />
 
-        {/* Attire - Soft Hues, Neutrals, Pastels Indo Western Indian */}
         <img
           src={text7}
           alt="Attire - Soft Hues, Neutrals, Pastels Indo Western Indian"

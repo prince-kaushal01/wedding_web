@@ -10,23 +10,19 @@ const SONG_START = 91
 
 // onOpened: a function from App.jsx, called when the envelope has fully gone
 const Envelope = ({ onOpened }) => {
-  // contextSafe makes GSAP clean up the animation if this component is removed
   const { contextSafe } = useGSAP()
 
-  // Runs when the seal is clicked
   const openEnvelope = contextSafe(() => {
-    // Browsers only let a website start sound inside a tap. This tap on the seal is our only chance,
-    // so the song is started here, at full "play" but with its volume knob turned down to 0.
-    // The volume knob is a Web Audio "gain". (Muting the song and un-muting it later does not work:
-    // browsers refuse to un-mute outside a tap, and phones ignore the normal volume setting.)
+    // Sound may only start inside a tap, so the song starts here at volume 0 (a Web Audio gain)
+    // and is turned up later. Un-muting later does not work: browsers block it outside a tap
     const music = document.querySelector('.song')
     const AudioContextClass = window.AudioContext || window.webkitAudioContext
     const audio = new AudioContextClass()
     const volume = audio.createGain()
-    volume.gain.value = 0 // 0 = silent, 1 = full volume
+    volume.gain.value = 0
     audio.createMediaElementSource(music).connect(volume).connect(audio.destination)
     audio.resume()
-    music.play().catch(() => {}) // if the browser still refuses, the site simply stays silent
+    music.play().catch(() => {})
 
     const tl = gsap.timeline()
 
@@ -54,10 +50,8 @@ const Envelope = ({ onOpened }) => {
   })
 
   return (
-    // Full screen wrapper, sits on top of Page1 and hides anything outside the screen
     <div className="envelope fixed inset-0 z-50 flex justify-center overflow-hidden bg-[#d3e4ec]">
-      {/* The song. It has no controls so it shows nothing on the page.
-          When it reaches the end it goes back to 01:31 and plays again */}
+      {/* No controls, so nothing shows. At the end it goes back to SONG_START */}
       <audio
         className="song"
         src={song}
@@ -68,24 +62,20 @@ const Envelope = ({ onOpened }) => {
         }}
       />
 
-      {/* Stage: a 9:16 box as tall as the screen (and never narrower than the screen).
-          Everything inside is sized in % of this box, so it looks the same on short and long screens */}
+      {/* 9:16 stage: everything inside is sized in % of it, so it looks the same on every screen */}
       <div className="relative h-[max(100svh,177.78vw)] aspect-9/16 shrink-0">
-        {/* Envelope body */}
         <img
           src={envBottom}
           alt=""
           className="env-bottom absolute bottom-[-1.6%] left-1/2 h-[83.1%] w-auto max-w-none -translate-x-1/2"
         />
 
-        {/* Envelope flap */}
         <img
           src={envTop}
           alt=""
           className="env-top absolute top-[-0.8%] left-1/2 h-[63.5%] w-auto max-w-none -translate-x-1/2"
         />
 
-        {/* Wax seal button */}
         <button
           type="button"
           aria-label="Open invitation"

@@ -24,15 +24,11 @@ import text7 from '../assets/page2-text7.png'
 gsap.registerPlugin(ScrollTrigger)
 
 const Page2 = () => {
-  // Scroll animation: everything moves only as much as the user scrolls (scrub).
-  // Order: the big curtains start opening, and when they are 70% open the page's own animations start.
+  // Scroll animation: the big curtains open first, and at 70% open the page's own animations start
   useGSAP(() => {
-    // ---------- The page's own animations ----------
-    // A timeline with no scroll settings of its own: it is placed inside the main timeline below.
-    // The number at the end of each line is the position on this timeline (0 = start, 10 = end).
-    // Elements that are placed with a Tailwind translate class sit inside a full-screen wrapper div,
-    // and GSAP moves the wrapper. (If GSAP moved those images directly it would break their translate.)
-    // For the wrappers, xPercent / yPercent are a % of the screen: -50 = half a screen up or left.
+    // The page's own animations. Last number on each line = position on the timeline (0 to 10).
+    // Images with a Tailwind translate class sit in a wrapper div and GSAP moves the wrapper,
+    // because moving those images directly would break their translate
     const page = gsap.timeline()
 
     // 1. Top elements come down from the top
@@ -55,33 +51,28 @@ const Page2 = () => {
     // 5. Couple grows from 0 to full size. transformOrigin is the couple's feet
     page.from('.p2-couple',  { xPercent: 120, duration: 3, ease: 'none' }, 7)
 
-    // ---------- Main timeline: big curtains first, then the page ----------
-    // It starts when the top of Page2 is 70% down the screen and ends when the extra height is used up.
+    // Main timeline: big curtains first, then the page
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '.page2-stage',
         start: 'top 70%',
         end: 'bottom bottom',
-        scrub: true, // tie the animation to the scroll position
+        scrub: true,
       },
     })
 
-    // The big curtains open during positions 0 to 10
-    tl.to('.p2-curtain-left', { xPercent: -100, duration: 10, ease: 'none' }, 0) // goes out to the left
-    tl.to('.p2-curtain-right', { xPercent: 100, duration: 10, ease: 'none' }, 0) // goes out to the right
+    tl.to('.p2-curtain-left', { xPercent: -100, duration: 10, ease: 'none' }, 0)
+    tl.to('.p2-curtain-right', { xPercent: 100, duration: 10, ease: 'none' }, 0)
 
     // The page's animations start at position 7 = when the curtains are 70% open
     tl.add(page, 7)
   })
 
   return (
-    // Stage: 200svh tall = one screen for Page2 + 100svh of extra scrolling for the curtains and the animations.
-    // Page2 stays stuck on the screen during that extra scrolling. (No overflow-hidden here, it would break sticky)
-    // Make the 200svh bigger for a slower opening, smaller for a faster one.
+    // 200svh = one screen + 100svh of extra scrolling while Page2 stays stuck. Bigger = slower opening.
+    // No overflow-hidden here: it would break sticky
     <div className="page2-stage relative h-[200svh] w-full bg-[#0a0f24]">
-      {/* The page itself: one screen tall. All sizes follow the screen height (svh) */}
       <div className="page2 sticky top-0 h-svh w-full overflow-hidden bg-[#0a0f24]">
-        {/* Background: night sky and floor */}
         <img
           src={bg}
           alt=""
@@ -95,7 +86,7 @@ const Page2 = () => {
           className="p2-sparkle absolute -top-16 left-0 h-[33svh] w-full object-cover z-50"
         />
 
-        {/* Left and right curtains: full height, partly outside the screen */}
+        {/* Side curtains */}
         <div className="p2-left pointer-events-none absolute inset-0">
           <img
             src={left}
@@ -129,51 +120,43 @@ const Page2 = () => {
           />
         </div>
 
-        {/* Texts, stacked in the middle */}
         <div className="relative flex h-full flex-col items-center pt-[25.5svh]">
-          {/* Welcome Dinner */}
           <img
             src={text1}
             alt="Welcome Dinner"
             className="p2-text h-[clamp(1.1rem,3svh,2rem)] w-auto max-w-none"
           />
 
-          {/* Sunday */}
           <img
             src={text2}
             alt="Sunday"
             className="p2-text mt-[clamp(0.6rem,2svh,1.4rem)] h-[clamp(0.75rem,2.1svh,1.4rem)] w-auto max-w-none"
           />
 
-          {/* 29th */}
           <img
             src={text3}
             alt="29th"
             className="p2-text mt-[clamp(0.15rem,0.6svh,0.4rem)] h-[clamp(2.1rem,5.9svh,3.9rem)] w-auto max-w-none"
           />
 
-          {/* November 2026 */}
           <img
             src={text4}
             alt="November 2026"
             className="p2-text mt-[clamp(0.4rem,1.4svh,1rem)] h-[clamp(0.6rem,1.7svh,1.15rem)] w-auto max-w-none"
           />
 
-          {/* 8:30 PM Onwards */}
           <img
             src={text5}
             alt="8:30 PM Onwards"
             className="p2-text mt-[clamp(0.75rem,2.4svh,1.6rem)] h-[clamp(0.6rem,1.7svh,1.15rem)] w-auto max-w-none"
           />
 
-          {/* At - The Grand Ballroom */}
           <img
             src={text6}
             alt="At - The Grand Ballroom"
             className="p2-text mt-[clamp(0.7rem,2.2svh,1.5rem)] h-[clamp(0.6rem,1.7svh,1.15rem)] w-auto max-w-none"
           />
 
-          {/* Attire - Retro Vibe */}
           <img
             src={text7}
             alt="Attire - Retro Vibe"
@@ -197,9 +180,7 @@ const Page2 = () => {
           />
         </div>
 
-        {/* Couple. Uses page2-couple-crop.png: the same picture as page2-couple.png with the huge empty space
-            cut away (the full 6980px-wide image made scrolling freeze on phones). The image is 28.6svh wide,
-            so this left value puts the couple's centre at 78% of the screen width */}
+        {/* Couple (cropped image). It is 28.6svh wide, so this left value centres it at 78% of the screen */}
         <img
           src={couple}
           alt="Jyoti and Prakhar"
@@ -215,8 +196,7 @@ const Page2 = () => {
           />
         </div>
 
-        {/* Big curtains: cover the whole page (z-20, above everything) and slide open while scrolling.
-            Each one is a little wider than half the screen so there is no gap in the middle */}
+        {/* Big opening curtains: each a little wider than half the screen, so no gap in the middle */}
         <div className="p2-curtain-left pointer-events-none absolute inset-y-0 left-0 z-20 w-[51%]">
           <img src={leftCurtain} alt="" className="h-full w-full" />
         </div>
