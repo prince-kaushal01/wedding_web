@@ -7,7 +7,7 @@ import Countdown from '../components/Countdown'
 // DUMMY LINK: replace this with your own Google Apps Script "web app" link
 // (the script that adds a row to your Google Sheet). The form sends its answers here,
 // under the names: name, attending, mood
-const SHEET_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxTJq-yEg6oszjayt3yKImTef0qfgdE8wuapcDJaljw3nh_XuEOO52JUgimltesxT5J/exec'
 
 // The venue's Google Maps share link. The "Open in Google Maps" button opens this
 const MAPS_URL = 'https://maps.app.goo.gl/QhK3acpeJorFdBUk9?g_st=iw'
@@ -16,8 +16,9 @@ const MAPS_URL = 'https://maps.app.goo.gl/QhK3acpeJorFdBUk9?g_st=iw'
 const MAP_EMBED_URL =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3844.9508130219765!2d73.8092587!3d15.487077699999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfc085624c679b%3A0xd3f137e3ddd48a8c!2sGoa%20Marriott%20Resort%20%26%20Spa!5e0!3m2!1sen!2sin!4v1791382146726!5m2!1sen!2sin'
 
-// The countdown runs to this date and time: 29 November 2026, 4:30 PM, India time
-const WEDDING_DATE = '2026-11-29T16:30:00+05:30'
+// The countdown runs to this date and time: 30 November 2026, 5:00 PM, India time (the Engagement).
+// Format: year-month-day T hours:minutes:seconds, then +05:30 for India time. 17:00 = 5:00 PM
+const WEDDING_DATE = '2026-11-30T17:00:00+05:30'
 
 // The choices for "Engagement mood". Add, remove or change them here
 const MOODS = ['The food', 'The entertainment', 'The love', 'All of the above']
