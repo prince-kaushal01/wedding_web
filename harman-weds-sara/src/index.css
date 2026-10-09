@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* ── Water wave (Homepage) ── */
+@keyframes waterWave {
+  0%, 100% {
+    transform: translateY(0px) scaleX(1);
+    filter: brightness(1) saturate(1);
+  }
+  20% {
+    transform: translateY(-4px) scaleX(1.007);
+    filter: brightness(1.04) saturate(1.05);
+  }
+  40% {
+    transform: translateY(-2px) scaleX(0.996);
+    filter: brightness(0.97) saturate(0.97);
+  }
+  60% {
+    transform: translateY(-5px) scaleX(1.004);
+    filter: brightness(1.03) saturate(1.03);
+  }
+  80% {
+    transform: translateY(-3px) scaleX(0.998);
+    filter: brightness(0.98) saturate(0.99);
+  }
+}
+
+/* ── Center-image gentle pulse (ScratchCard page) ── */
+@keyframes pulseZoom {
+  0%, 100% { transform: scale(1);    }
+  50%       { transform: scale(1.06); }
+}
+
+/* ── Disco bob up-down (Shaggan page) ── */
+@keyframes bobUpDown {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-9px); }
+}
+
+/* ── Table gentle zoom (Shaggan page) ── */
+@keyframes tableZoom {
+  0%, 100% { transform: scale(1);    }
+  50%       { transform: scale(1.05); }
+}
+
+/* ── Drum very subtle zoom (Jaggo page) ── */
+@keyframes drumZoom {
+  0%, 100% { transform: scale(1);    }
+  50%       { transform: scale(1.03); }
+}
+
+/* ── Loading screen spinning ring ── */
+@keyframes loaderSpin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Loading screen inner pulse ── */
+@keyframes loaderPulse {
+  0%, 100% { transform: scale(0.85); opacity: 0.5; }
+  50%       { transform: scale(1.1);  opacity: 1;   }
+}
