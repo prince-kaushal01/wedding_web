@@ -81,7 +81,7 @@ const Page3 = () => {
   })
 
   return (
-    <div className="page3 relative h-svh w-full overflow-hidden bg-[#f7e7d3]">
+    <div className="page3 relative h-lvh w-full overflow-hidden bg-[#f7e7d3]">
       <img
         src={bg}
         alt=""

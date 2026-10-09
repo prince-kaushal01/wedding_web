@@ -72,7 +72,7 @@ const Page2 = () => {
     // 200svh = one screen + 100svh of extra scrolling while Page2 stays stuck. Bigger = slower opening.
     // No overflow-hidden here: it would break sticky
     <div className="page2-stage relative h-[200svh] w-full bg-[#0a0f24]">
-      <div className="page2 sticky top-0 h-svh w-full overflow-hidden bg-[#0a0f24]">
+      <div className="page2 sticky top-0 h-lvh w-full overflow-hidden bg-[#0a0f24]">
         <img
           src={bg}
           alt=""
