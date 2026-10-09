@@ -142,7 +142,7 @@ const Rsvp = () => {
       <div className="rsvp-item mt-[clamp(1.25rem,4svh,2.5rem)] flex w-full max-w-sm flex-col items-center">
         <p className="font-['Pinyon_Script'] text-[clamp(1.5rem,4svh,2.3rem)] leading-tight text-[#8a1c2b]">Location</p>
         <p className="mt-[clamp(0.15rem,0.6svh,0.4rem)] font-serif text-[clamp(0.95rem,2.3svh,1.2rem)] text-[#1f2f6b]">
-          Marriott Resort and Spa
+          MARRIOTT RESORT AND SPA, GOA 
         </p>
 
         <iframe

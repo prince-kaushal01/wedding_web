@@ -41,13 +41,13 @@ const Page1 = ({ start }) => {
     })
   }, [start])
 
-  // "Scroll down" hint: pops in after the logo, names and card
+  // "Scroll down" hint: pops in after the logo, names, card and resort name
   useGSAP(() => {
     gsap.set('.p1-hint', { opacity: 0, scale: 0 })
 
     if (!start) return
 
-    gsap.to('.p1-hint', { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2)', delay: 2.2 })
+    gsap.to('.p1-hint', { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2)', delay: 2.55 })
 
     gsap.to('.p1-hint-arrow', { y: 4, duration: 0.7, ease: 'sine.inOut', repeat: -1, yoyo: true })
   }, [start])
@@ -169,7 +169,7 @@ const Page1 = ({ start }) => {
       {/* Texts. No z-index on this box, so the logo can be z-1 and the other texts z-10 */}
       <div className="absolute inset-x-0 top-0">
         {/* First texts: logo, names and date */}
-        <div className="flex h-[65svh] flex-col items-center pt-22">
+        <div className="flex h-[65svh] flex-col items-center pt-18">
           <img
             src={logo}
             alt="Jyoti and Prakhar logo"
@@ -196,6 +196,11 @@ const Page1 = ({ start }) => {
               className="mt-[clamp(0.4rem,1.5svh,1rem)] h-[clamp(0.6rem,1.6svh,1.4rem)] w-auto max-w-none"
             />
           </ScratchCard>
+
+          {/* Resort name. Size: text-[clamp(...)] */}
+          <p className="p1-drop relative z-10 mt-[clamp(0.5rem,2svh,1.2rem)] px-4 text-center font-serif text-[clamp(0.6rem,1.5svh,0.85rem)] tracking-[0.18em] text-[#1f2f6b] uppercase">
+            Marriott Resort and Spa, Goa
+          </p>
 
           {/* "Scroll down" hint. Size: text-[clamp(...)]. Colour: the /55 is its strength, lower = lighter */}
           <div className="p1-hint relative z-10 mt-[clamp(0.7rem,2.2svh,1.3rem)] flex items-center gap-1 font-serif text-[clamp(0.55rem,1.3svh,0.7rem)] tracking-[0.2em] text-[#1f2f6b]/55 uppercase">

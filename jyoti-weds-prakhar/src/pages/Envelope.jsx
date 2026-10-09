@@ -30,9 +30,10 @@ const Envelope = ({ onOpened }) => {
     tl.set('.env-seal', { pointerEvents: 'none' })
     tl.to('.env-seal', { opacity: 0, duration: 0.5 })
 
-    // 2. Flap goes up and body goes down, both at the same time
+    // 2. Flap goes up and body goes down, both at the same time; label uses y:"100svh" to guarantee it exits the screen
     tl.to('.env-top', { yPercent: -100, duration: 1.5, ease: 'power2.inOut' })
     tl.to('.env-bottom', { yPercent: 100, duration: 1.5, ease: 'power2.inOut' }, '<')
+    tl.to('.env-tap-label', { y: '100svh', duration: 1.5, ease: 'power2.inOut' }, '<')
 
     // 3. Whole envelope fades out, then it is removed so Page1 can be used
     tl.to('.envelope', { opacity: 0, duration: 1 })
@@ -84,6 +85,8 @@ const Envelope = ({ onOpened }) => {
         >
           <img src={envButton} alt="" className="h-full w-auto max-w-none" />
         </button>
+
+        <p className="env-tap-label absolute top-[62%] left-1/2 -translate-x-1/2 font-['Pinyon_Script'] text-[clamp(1.8rem,5svh,2.8rem)] text-[#7a5c3e]">Tap Here</p>
       </div>
     </div>
   )
